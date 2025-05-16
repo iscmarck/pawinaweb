@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Servicios</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            padding: 50px;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            width: 80%;
+            margin: auto;
+        }
+        h1 {
+            color: #333;
+        }
+        .services {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        .service {
+            background-color: #008000; /* Verde bandera */
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            width: 250px;
+            text-align: center;
+        }
+        .nav {
+            margin-top: 20px;
+        }
+        .nav button {
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            background-color: #008000;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .nav button:hover {
+            background-color: #006400;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Nuestros Servicios</h1>
+        <p>Ofrecemos soluciones innovadoras adaptadas a tus necesidades. Descubre todo lo que podemos hacer por ti.</p>
+
+        <div class="nav">
+            <button onclick="location.href='index.html'">Inicio</button>
+            <button onclick="location.href='sobre.html'">Sobre Nosotros</button>
+            <button onclick="location.href='servicios.html'">Servicios</button>
+            <button onclick="location.href='contacto.html'">Contacto</button>
+        </div>
+
+        <div class="services">
+            <div class="service">
+                <h3>Desarrollo Web</h3>
+                <p>Creación de sitios modernos y responsivos.</p>
+            </div>
+            <div class="service">
+                <h3>Diseño UX/UI</h3>
+                <p>Experiencias digitales optimizadas y atractivas.</p>
+            </div>
+            <div class="service">
+                <h3>Consultoría Tecnológica</h3>
+                <p>Asesoramiento en soluciones tecnológicas avanzadas.</p>
+            </div>
+            <div class="service">
+                <h3>SEO & Marketing Digital</h3>
+                <p>Mejora tu visibilidad y alcance en línea.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
