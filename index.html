@@ -17,6 +17,7 @@
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
             display: inline-block;
+            width: 80%;
         }
         h1 {
             color: #333;
@@ -27,12 +28,34 @@
             border-radius: 10px;
             margin-top: 15px;
         }
+        .nav {
+            margin-top: 20px;
+        }
+        .nav button {
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            background-color: #008000; /* Verde bandera */
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .nav button:hover {
+            background-color: #006400; /* Verde bandera más oscuro */
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>¡Bienvenido a Mi Sitio!</h1>
         <p>Estamos encantados de recibirte. Explora y disfruta del contenido.</p>
+        <div class="nav">
+            <button onclick="location.href='index.html'">Inicio</button>
+            <button onclick="location.href='sobre.html'">Sobre Nosotros</button>
+            <button onclick="location.href='servicios.html'">Servicios</button>
+            <button onclick="location.href='contacto.html'">Contacto</button>
+        </div>
         <img src="imagen.jpg" alt="Imagen de bienvenida">
     </div>
 </body>
