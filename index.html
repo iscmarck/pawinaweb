@@ -1,284 +1,192 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<title>Buscador Bibliográfico</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mi Biblioteca Jovel</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
 
-<style>
-body {
-    font-family: Arial, sans-serif;
-    background: #f4f6f9;
-    margin: 0;
-    padding: 20px;
-}
+    .container {
+      background-color: white;
+      padding: 30px 40px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      margin: 40px auto;
+      max-width: 1000px;
+    }
 
-h1 {
-    text-align: center;
-}
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 20px;
+    }
 
-#buscador {
-    width: 100%;
-    max-width: 500px;
-    margin: 20px auto;
-    display: block;
-    padding: 10px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-}
+    .logo {
+      max-height: 50px;
+    }
 
-/* 🔥 Layout */
-.layout {
-    display: flex;
-    gap: 20px;
-    max-width: 1100px;
-    margin: auto;
-}
+    .nav {
+      display: flex;
+      justify-content: flex-end;
+      gap: 15px;
+    }
 
-/* 🔤 Abecedario */
-.abecedario {
-    text-align: center;
-    margin-bottom: 20px;
-}
+    .nav button {
+      background: none;
+      border: none;
+      color: #2e7d32;
+      font-size: 18px;
+      padding: 10px 0;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: all 0.3s ease;
+      font-weight: bold;
+    }
 
-.letra {
-    display: inline-block;
-    margin: 3px;
-    padding: 6px 10px;
-    background: #ddd;
-    border-radius: 5px;
-    cursor: pointer;
-}
+    .nav button:hover {
+      color: #27a32f;
+      border-bottom: 2px solid #1b5e20;
+    }
 
-.activa {
-    background: #007bff;
-    color: white;
-}
+    h1 {s
+      color: #333;
+      text-align: center;
+    }
 
-/* 📚 Lista principal */
-.contenedor {
-    flex: 3;
-}
+    p {
+      text-align: justify;
+      line-height: 1.7;
+      color: #444;
+      max-width: 800px;
+      margin: 0 auto 20px auto;
+    }
 
-.item {
-    display: flex;
-    gap: 15px;
-    background: white;
-    margin: 10px 0;
-    padding: 15px;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    align-items: center;
-}
+    ul {
+      text-align: left;
+      max-width: 800px;
+      margin: 0 auto 30px auto;
+      padding-left: 20px;
+      color: #444;
+      line-height: 1.6;
+    }
 
-.item img {
-    width: 100px;
-    height: 120px;
-    object-fit: cover;
-    border-radius: 8px;
-}
+    ul li {
+      margin-bottom: 8px;
+    }
 
-.contenido {
-    flex: 1;
-}
+    .slider-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 30px 0 40px 0;
+      max-width: 100%;
+      overflow: hidden;
+      position: relative;
+    }
 
-.tipo {
-    font-size: 12px;
-    color: white;
-    padding: 3px 8px;
-    border-radius: 5px;
-}
+    .slider-manual {
+      width: 90%;
+      overflow: hidden;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      margin: 0 10px;
+    }
 
-.libro { background: #007bff; }
-.revista { background: #28a745; }
-.articulo { background: #ffc107; color: black; }
-.folleto { background: #dc3545; }
+    .slides {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
 
-/* 🆕 Sidebar */
-.sidebar {
-    flex: 1;
-}
+    .slides img {
+      width: 300px;
+      height: 200px;
+      object-fit: cover;
+      flex-shrink: 0;
+      margin-right: 10px;
+      border-radius: 10px;
+    }
 
-.nuevos {
-    background: white;
-    padding: 15px;
-    border-radius: 10px;
-    border: 2px solid #007bff;
-}
+    .slider-btn {
+      background-color: #2e7d32;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      font-size: 22px;
+      cursor: pointer;
+      border-radius: 50%;
+      transition: background 0.3s ease;
+      user-select: none;
+    }
 
-.nuevos h3 {
-    margin-top: 0;
-    text-align: center;
-}
-
-.nuevo-item {
-    font-size: 14px;
-    margin: 8px 0;
-    border-bottom: 1px solid #eee;
-    padding-bottom: 5px;
-}
-
-.numero {
-    font-weight: bold;
-    color: #007bff;
-}
-
-</style>
+    .slider-btn:hover {
+      background-color: #1b5e20;
+    }
+  </style>
 </head>
 <body>
-
-<h1>Buscador Bibliográfico</h1>
-
-<input type="text" id="buscador" placeholder="Buscar...">
-
-<div class="abecedario" id="abecedario"></div>
-
-<div class="layout">
-
-    <!-- 📚 IZQUIERDA -->
-    <div class="contenedor" id="lista"></div>
-
-    <!-- 🆕 DERECHA -->
-    <div class="sidebar">
-        <div class="nuevos">
-            <h3>Nuevos títulos</h3>
-            <div id="nuevosLista"></div>
-        </div>
+  <div class="container">
+    <div class="header">
+      <img src="logo.jpg" alt="Logo de Mi Biblioteca Jovel" class="logo"/>
+      <div class="nav">
+        <button onclick="location.href='index.html'">Inicio</button>
+        <button onclick="location.href='sobre.html'">Sobre Nosotros</button>
+        <button onclick="location.href='servicios.html'">Servicios</button>
+        <button onclick="location.href='contacto.html'">Contacto</button>
+      </div>
     </div>
 
-</div>
+    <h1>¡Bienvenido a Mi Biblioteca Jovel!</h1>
 
-<script>
-const datos = [
-    {tipo: "libro", titulo: "Historia de Chiapas", autor: "Juan Pérez", imagen: "imagenes/libro1.jpg"},
-    {tipo: "revista", titulo: "Cultura y Sociedad", autor: "María López", imagen: "imagenes/revista1.jpg"},
-    {tipo: "articulo", titulo: "Turismo en San Cristóbal", autor: "Carlos Ruiz", imagen: "imagenes/articulo1.jpg"},
-    {tipo: "folleto", titulo: "Guía turística Chiapas", autor: "Gobierno de México", imagen: "imagenes/folleto1.jpg"},
-    {tipo: "libro", titulo: "Ecosistemas de Chiapas", autor: "Ana Gómez", imagen: "imagenes/libro2.jpg"},
-    {tipo: "articulo", titulo: "Economía regional", autor: "Luis Hernández", imagen: "imagenes/articulo2.jpg"},
-    {tipo: "libro", titulo: "Biodiversidad en Chiapas", autor: "Laura Méndez", imagen: "imagenes/libro3.jpg"},
-    {tipo: "revista", titulo: "Investigación Ambiental", autor: "UNAM", imagen: "imagenes/revista2.jpg"},
-    {tipo: "articulo", titulo: "Cambio climático en México", autor: "Pedro Torres", imagen: "imagenes/articulo3.jpg"},
-    {tipo: "libro", titulo: "Zoología de México", autor: "Dr. Rivera", imagen: "imagenes/libro4.jpg"}
-];
+    <p>Esta biblioteca ha sido creada con el propósito de preservar, difundir y celebrar la riqueza histórica, cultural y social de San Cristóbal de Las Casas, Chiapas. Aquí encontrarás información única, cuidadosamente seleccionada, que retrata la esencia de una de las ciudades más emblemáticas del sureste mexicano.</p>
+    <p>San Cristóbal, conocida antiguamente como Jovel por los pueblos originarios, es un crisol de culturas donde conviven tradiciones indígenas, raíces coloniales y expresiones contemporáneas. Desde sus calles empedradas y arquitectura virreinal, hasta su vibrante vida comunitaria y lucha por los derechos de los pueblos originarios, esta ciudad ha sido testigo de siglos de historia que merecen ser contados.</p>
+    <p>Nuestra biblioteca es un espacio digital dedicado exclusivamente a reunir contenidos relacionados con esta ciudad chiapaneca:</p>
+    
+    <ul>
+      <li>Historia local y crónicas</li>
+      <li>Biografías de personajes destacados</li>
+      <li>Cultura y cosmovisión de los pueblos tzotziles y tzeltales</li>
+      <li>Arte, literatura y patrimonio</li>
+      <li>Movimientos sociales y vida contemporánea</li>
+    </ul>
 
-const lista = document.getElementById("lista");
-const buscador = document.getElementById("buscador");
-const abecedarioDiv = document.getElementById("abecedario");
-const nuevosLista = document.getElementById("nuevosLista");
+    <div class="slider-container">
+      <button class="slider-btn prev" onclick="moveSlide(-1)">⟨</button>
 
-let letraSeleccionada = "TODOS";
+      <div class="slider-manual">
+        <div class="slides" id="slides">
+          <img src="foto1.jpg" alt="Foto 1" />
+          <img src="foto2.jpg" alt="Foto 2" />
+          <img src="foto3.jpg" alt="Foto 3" />
+          <img src="foto4.jpg" alt="Foto 4" />
+          <img src="foto5.jpg" alt="Foto 5" />
+          <img src="foto6.jpg" alt="Foto 6" />
+          <img src="foto7.jpg" alt="Foto 7" />
+        </div>
+      </div>
 
-// 🔤 Abecedario
-"ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("").forEach(letra => {
-    const span = document.createElement("span");
-    span.textContent = letra;
-    span.classList.add("letra");
+      <button class="slider-btn next" onclick="moveSlide(1)">⟩</button>
+    </div>
+  </div>
 
-    span.onclick = () => {
-        letraSeleccionada = letra;
-        actualizarActiva(span);
-        mostrarDatos(buscador.value);
-    };
+  <script>
+    let currentIndex = 0;
+    const slideWidth = 310;
+    const slides = document.getElementById('slides');
+    const totalSlides = slides.children.length;
 
-    abecedarioDiv.appendChild(span);
-});
-
-// TODOS
-const todosBtn = document.createElement("span");
-todosBtn.textContent = "TODOS";
-todosBtn.classList.add("letra", "activa");
-
-todosBtn.onclick = () => {
-    letraSeleccionada = "TODOS";
-    actualizarActiva(todosBtn);
-    mostrarDatos(buscador.value);
-};
-
-abecedarioDiv.appendChild(todosBtn);
-
-function actualizarActiva(el) {
-    document.querySelectorAll(".letra").forEach(l => l.classList.remove("activa"));
-    el.classList.add("activa");
-}
-
-// 🔤 Normalizar
-function normalizar(t) {
-    return t.toLowerCase()
-        .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "")
-        .replace(/[.,]/g, "");
-}
-
-// 🔤 Ordenar
-function ordenarDatos(arr) {
-    return arr.sort((a, b) =>
-        normalizar(a.titulo).localeCompare(normalizar(b.titulo))
-    );
-}
-
-// 📚 Mostrar lista principal
-function mostrarDatos(filtro="") {
-    lista.innerHTML = "";
-    const f = normalizar(filtro);
-
-    let resultado = datos.filter(item => {
-        const coincide =
-            normalizar(item.titulo).includes(f) ||
-            normalizar(item.autor).includes(f) ||
-            normalizar(item.tipo).includes(f);
-
-        const coincideLetra =
-            letraSeleccionada === "TODOS" ||
-            normalizar(item.titulo).startsWith(normalizar(letraSeleccionada));
-
-        return coincide && coincideLetra;
-    });
-
-    resultado = ordenarDatos(resultado);
-
-    const limite = (letraSeleccionada === "TODOS") ? 10 : 6;
-    resultado.slice(0, limite).forEach(item => {
-        const div = document.createElement("div");
-        div.classList.add("item");
-
-        div.innerHTML = `
-            <img src="${item.imagen}">
-            <div class="contenido">
-                <span class="tipo ${item.tipo}">${item.tipo}</span>
-                <h3>${item.titulo}</h3>
-                <p>${item.autor}</p>
-            </div>
-        `;
-        lista.appendChild(div);
-    });
-}
-
-// 🆕 Mostrar nuevos (últimos 10)
-function mostrarNuevos() {
-    nuevosLista.innerHTML = "";
-
-    const nuevos = [...datos].reverse().slice(0, 10);
-
-    nuevos.forEach((item, index) => {
-        const div = document.createElement("div");
-        div.classList.add("nuevo-item");
-
-        div.innerHTML = `
-            <span class="numero">${index + 1}.</span>
-            ${item.titulo}
-        `;
-
-        nuevosLista.appendChild(div);
-    });
-}
-
-// eventos
-buscador.onkeyup = e => mostrarDatos(e.target.value);
-
-// inicial
-mostrarDatos();
-mostrarNuevos();
-</script>
-
+    function moveSlide(direction) {
+      currentIndex += direction;
+      if (currentIndex < 0) currentIndex = 0;
+      if (currentIndex > totalSlides - 3) currentIndex = totalSlides - 3;
+      slides.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
+    }
+  </script>
 </body>
 </html>
